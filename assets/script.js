@@ -1,27 +1,26 @@
-// var startQuiz = document.querySelector("#start");
-// startQuiz.addEventListener("click", function() {
-//     function timeRemaining()
-// });
+var startQuiz = document.getElementById("start");
+startQuiz.addEventListener("click", function() {
+  var timeEl = document.querySelector(".timeLeft");
+  var secondsLeft = 120;
+  function timeRemaining() {
+    var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft + " seconds remaining of quiz.";
 
-var timeEl = document.querySelector(".timeLeft");
+      if(secondsLeft === 0) {
+        clearInterval(timerInterval);
+        sendMessage();
+      }
 
-var secondsLeft = 120;
-function timeRemaining() {
-  var timerInterval = setInterval(function() {
-  secondsLeft--;
-  timeEl.textContent = secondsLeft + " seconds remaining of quiz.";
+    }, 1000);
+  }
 
-    if(secondsLeft === 0) {
-      clearInterval(timerInterval);
-      sendMessage();
-    }
+  function sendMessage() {
+    timeEl.textContent = "TIME OUT";
+  }
 
-  }, 1000);
-}
+  timeRemaining();
 
-function sendMessage() {
-  timeEl.textContent = "TIME OUT";
-}
+});
 
-timeRemaining();
 
