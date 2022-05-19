@@ -1,92 +1,102 @@
-// Quiz questions stored as objects
-var queshOne = {
-  Question: "???",
-  A: "answer",
-  B: "answer",
-  C: "answer",
-  D: "answer",
-};
+// Quiz questions stored as objects within an array
+var questions = [
+  {
+    Question: "???",
+    A: "answer",
+    B: "answer",
+    C: "answer",
+    D: "answer",
+  },
 
-var queshTwo = {
-  Question: "???",
-  A: "answer",
-  B: "answer",
-  C: "answer",
-  D: "answer",
-};
+  {
+    Question: "???",
+    A: "answer",
+    B: "answer",
+    C: "answer",
+    D: "answer",
+  },
 
-var queshThree = {
-  Question: "???",
-  A: "answer",
-  B: "answer",
-  C: "answer",
-  D: "answer",
-};
+  {
+    Question: "???",
+    A: "answer",
+    B: "answer",
+    C: "answer",
+    D: "answer",
+  },
 
-var queshFour = {
-  Question: "???",
-  A: "answer",
-  B: "answer",
-  C: "answer",
-  D: "answer",
-};
+  {
+    Question: "???",
+    A: "answer",
+    B: "answer",
+    C: "answer",
+    D: "answer",
+  },
 
-var queshFive = {
-  Question: "???",
-  A: "answer",
-  B: "answer",
-  C: "answer",
-  D: "answer",
-};
+  {
+    Question: "???",
+    A: "answer",
+    B: "answer",
+    C: "answer",
+    D: "answer",
+  },
 
-var queshSix = {
-  Question: "???",
-  A: "answer",
-  B: "answer",
-  C: "answer",
-  D: "answer",
-};
+  {
+    Question: "???",
+    A: "answer",
+    B: "answer",
+    C: "answer",
+    D: "answer",
+  },
 
-var queshSeven = {
-  Question: "???",
-  A: "answer",
-  B: "answer",
-  C: "answer",
-  D: "answer",
-};
+  {
+    Question: "???",
+    A: "answer",
+    B: "answer",
+    C: "answer",
+    D: "answer",
+  },
 
-var queshEight = {
-  Question: "???",
-  A: "answer",
-  B: "answer",
-  C: "answer",
-  D: "answer",
-};
+  {
+    Question: "???",
+    A: "answer",
+    B: "answer",
+    C: "answer",
+    D: "answer",
+  },
 
-var queshNine = {
-  Question: "???",
-  A: "answer",
-  B: "answer",
-  C: "answer",
-  D: "answer",
-};
+  {
+    Question: "???",
+    A: "answer",
+    B: "answer",
+    C: "answer",
+    D: "answer",
+  },
 
-var queshTen = {
-  Question: "???",
-  A: "answer",
-  B: "answer",
-  C: "answer",
-  D: "answer",
-};
+  {
+    Question: "???",
+    A: "answer",
+    B: "answer",
+    C: "answer",
+    D: "answer",
+  },
+]
 
-// Calling question objects into an array
-var questions = ["queshOne", "queshTwo", "queshThree", "queshFour", "queshFive", "queshSix", "queshSeven", "queshEight", "queshNine", "queshTen"];
+// Calling question objects from array
 console.log(questions);
-console.log(queshTen);
 console.log(questions[3]);
 
-var startQuiz = document.getElementById("start");
+// For Argument to get quiz questions to rotate through
+for (var i = 0; i < questions.length; i++) {
+  var activeQuestion = randomIndex(questions);
+  console.log(activeQuestion);
+}
 
+// Randomly pulls a number will be used to call from the index of the questions array
+function randomIndex(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+var startQuiz = document.getElementById("start");
 startQuiz.addEventListener("click", function() {
 
   var timeEl = document.querySelector(".timeLeft");
@@ -119,7 +129,7 @@ startQuiz.addEventListener("click", function() {
   // This one actually appended
   var quizEl = document.getElementById("quiz");
   function quizSequence() {
-    quizEl.textContent = "Question 1";
+    quizEl.textContent = activeQuestion;
     document.body.appendChild(quizEl);
   }
 
@@ -127,4 +137,3 @@ startQuiz.addEventListener("click", function() {
   quizSequence();
 
 });
-
