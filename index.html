@@ -5,23 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timed Coding Quiz</title>
-    <!-- <link rel="stylesheet" href="./assets/css/style.css"> -->
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
     <header>
         <h1>
             Coding Knowledge: A Race Against the Clock
         </h1>
+        <h2 class ="timeLeft">Time: <span id="time">0</span></h2>
     </header>
 
     <main>
-        <h2>Instructions</h2>
-        <p>Welcome to the opportunity to test your coding knowledge. You will be presented with 10 multiple choice questions. The clock will begin at 120 seconds. However, each time you answer a question wrong, 11 seconds will be subtracted from your remaining time. Good luck!</p>
-        <button id="start">Start Quiz</button>
+        <div id="starter">
+            <h2>Instructions</h2>
+            <p>Welcome to the opportunity to test your coding knowledge. You will be presented with 10 multiple choice questions. The clock will begin at 120 seconds. However, each time you answer a question wrong, 11 seconds will be subtracted from your remaining time. Good luck!</p>
+            <button id="start">Start Quiz</button>
+        </div>
 
-        <h2 class ="timeLeft"></h2>
-        <div id="quiz"></div>
-        <div #main></div>
+        
+        <div id="quiz" class="hidden"></div>
+
+        <div id="gameOver" class="hidden">
+
+            <!-- element to show final score -->
+            <!-- box to enter intitals -->
+            <!-- button to submit initials -->
+        </div>
 
     </main>
     <script src="assets/script.js"></script>
