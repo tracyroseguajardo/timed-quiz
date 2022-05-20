@@ -2,7 +2,7 @@
 var questions = [
   {
     Question: "D???",
-    choices: ['A', 'b', 'c', 'd'],
+    choices: ['A', 'b', 'c', 'd', 'f', 'e'],
     Answer: "c",
   },
   {
@@ -17,12 +17,12 @@ var questions = [
   },
   {
     Question: "D???",
-    choices: ['A', 'b', 'c', 'd'],
+    choices: ['A', 'b', 'c', 'd', 'e'],
     Answer: "d",
   },
 
 ];
-
+var index = 0;
 var secondsLeft = 120;
 
 // DOM ELEMENTS
@@ -73,10 +73,52 @@ function start() {
 }
 
 function quizSequence() {
-  // quizEl.textContent = JSON.stringify(activeQuestion);
-  // document.body.appendChild(quizEl);
-  // quizEl.setAttribute("style", "font-size:20px;");
+// get the current question object from the array
+var currentQuestionObj = questions[index];
+
+//  create elment to display our question title
+var questionTitle = document.createElement("h3");
+questionTitle.textContent = currentQuestionObj.Question;
+
+// create element to house the buttons
+var buttonDiv = document.createElement("div");
+
+// create button dynamically based off of choice array in question variable
+for (var i = 0; i < currentQuestionObj.choices.length; i++) {
+  // create buttons
+  var btn = document.createElement("button");
+  btn.textContent = currentQuestionObj.choices[i];
+  btn.setAttribute('value', currentQuestionObj.choices[i])
+  // add event listener to buttons
+  btn.onclick = checkAnswer;
+  // add buttons to container that house buttons
+  buttonDiv.append(btn);
 }
+
+// add the elements to quizEl
+quizEl.append(questionTitle, buttonDiv);
+}
+
+function checkAnswer(){
+console.log(this.value);
+// check if the answer is wrong
+// deduct 11 from the time
+
+// increase the index by 1
+
+
+// if there are no more questions in the array end the game else ask the next question
+
+}
+
+// create function that ends the game and stops your timer, hides the wquestion container and displays the game over container
+
+
+
+
+
+
+
 // For Argument to get quiz questions to rotate through
 // alreadyAsked = []
 // //works but repeats questions. I want to cycle through each just once
