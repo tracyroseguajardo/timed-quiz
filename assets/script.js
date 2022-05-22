@@ -20,7 +20,36 @@ var questions = [
     choices: ['A', 'b', 'c', 'd', 'e'],
     Answer: "d",
   },
-
+  {
+    Question: "D???",
+    choices: ['A', 'b', 'c', 'd', 'f', 'e'],
+    Answer: "c",
+  },
+  {
+    Question: "D???",
+    choices: ['A', 'b', 'c', 'd', 'f', 'e'],
+    Answer: "c",
+  },
+  {
+    Question: "D???",
+    choices: ['A', 'b', 'c', 'd', 'f', 'e'],
+    Answer: "c",
+  },
+  {
+    Question: "D???",
+    choices: ['A', 'b', 'c', 'd', 'f', 'e'],
+    Answer: "c",
+  },
+  {
+    Question: "D???",
+    choices: ['A', 'b', 'c', 'd', 'f', 'e'],
+    Answer: "c",
+  },
+  {
+    Question: "D???",
+    choices: ['A', 'b', 'c', 'd', 'f', 'e'],
+    Answer: "c",
+  },
 ];
 var index = 0;
 var secondsLeft = 120;
@@ -31,13 +60,14 @@ var startEl = document.getElementById("starter");
 var quizEl = document.getElementById("quiz");
 var timeEl = document.querySelector("#time");
 var timerInterval;
-//var response = 
+var score = 0
+var currentQuestionObj = questions[index];
 
 function start() {
 
   timeEl.textContent = secondsLeft + " seconds remaining of quiz."
   // when the user clicks start we need to start the timer
-  timerInterval = setInterval(function () {
+  timerInterval = setInterval(function() {
     secondsLeft--;
     timeEl.textContent = secondsLeft + " seconds remaining of quiz.";
 
@@ -74,7 +104,7 @@ function start() {
 
 function quizSequence() {
 // get the current question object from the array
-var currentQuestionObj = questions[index];
+//var currentQuestionObj = questions[index];
 
 //  create elment to display our question title
 var questionTitle = document.createElement("h3");
@@ -89,8 +119,12 @@ for (var i = 0; i < currentQuestionObj.choices.length; i++) {
   var btn = document.createElement("button");
   btn.textContent = currentQuestionObj.choices[i];
   btn.setAttribute('value', currentQuestionObj.choices[i])
-  // add event listener to buttons
+  //add event listener to buttons
+  // btn.addEventListener("click", function() {
+  //   btn.value = checkAnswer
+  // });
   btn.onclick = checkAnswer;
+
   // add buttons to container that house buttons
   buttonDiv.append(btn);
 }
@@ -100,22 +134,36 @@ quizEl.append(questionTitle, buttonDiv);
 }
 
 function checkAnswer(){
-console.log(this.value);
-// check if the answer is wrong
-// deduct 11 from the time
-
-// increase the index by 1
-
+  console.log(this.value);
+  //console.log(event.target.value);
+  // check if the answer is wrong
+  console.log(currentQuestionObj.Answer);
+  if (this.value != currentQuestionObj.Answer) {
+  // deduct 11sec from the time
+  secondsLeft = (secondsLeft - 11);
+  timeEl.textContent = secondsLeft + " seconds remaining of quiz.";
+  } else {
+  // // increase the index by 1
+  // (response + 1)
+  score = (score + 1);
+  console.log(score);
+  } 
+}
 
 // if there are no more questions in the array end the game else ask the next question
+// currentQuestionObj.question[i++];
 
-}
+// }
 
 // create function that ends the game and stops your timer, hides the wquestion container and displays the game over container
 
+startQuiz.addEventListener("click", start);
 
+// TOP: any global variables
 
+// MIDDLE: any functions that are declared
 
+// BOTTOM:  all event listeners
 
 
 
@@ -134,12 +182,3 @@ console.log(this.value);
 // function randomIndex(array) {
 //   return array[Math.floor(Math.random() * array.length)];
 // }
-
-
-startQuiz.addEventListener("click", start);
-
-// TOP: any global variables
-
-// MIDDLE: any functions that are declared
-
-// BOTTOM:  all event listeners
