@@ -126,35 +126,24 @@ function quizSequence() {
     } else {
       //increase score +1  
       score = (score + 1);
-      console.log(score);
+      //increase index +1
       index = (index + 1);
     }
-    if (index > questions.length) {
-      console.log("RED");
-      endGame();
+  // if there are no more questions in the array end the game else ask the next question
+  if (index > questions.length) {
+    endGame();
     } else {
-      console.log("GREEN");
-      quizEl.textContent = "";
-      //quizEl.removeChild(questionTitle, buttonDiv);
-      quizSequence();
+    quizEl.textContent = "";
+    quizSequence();
     }
   }   
-  // increase the index by 1
-
-  // if there are no more questions in the array end the game else ask the next question
 }
-
-
-
-
 
 // create function that ends the game and stops your timer, hides the question container and displays the game over container
 
 function endGame() {
   //if all questions are answered
-
   //if time runs out
-  if (clearInterval) {
 
     //hides question container
     quizEl.setAttribute("class", "hidden");
