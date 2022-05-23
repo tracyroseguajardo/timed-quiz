@@ -86,23 +86,21 @@ function start() {
 function quizSequence() {
   // get the current question object from the array
   var currentQuestionObj = questions[index];
+
+  //Question Title
   //  create elment to display our question title
   var questionTitle = document.createElement("h3");
   questionTitle.textContent = currentQuestionObj.Question;
 
+  //Answer Buttons
   // create element to house the buttons
   var buttonDiv = document.createElement("div");
-
   // create button dynamically based off of choice array in question variable
   for (var i = 0; i < currentQuestionObj.choices.length; i++) {
     // create buttons
     var btn = document.createElement("button");
     btn.textContent = currentQuestionObj.choices[i];
     btn.setAttribute('value', currentQuestionObj.choices[i])
-    //add event listener to buttons
-    // btn.addEventListener("click", function() {
-    //   btn.value = checkAnswer
-    // });
     btn.onclick = checkAnswer;
 
     // add buttons to container that house buttons
@@ -111,7 +109,6 @@ function quizSequence() {
 
   // add the elements to quizEl
   quizEl.append(questionTitle, buttonDiv);
-  // }
 
   function checkAnswer() {
     console.log(this.value);
@@ -120,17 +117,19 @@ function quizSequence() {
     console.log(currentQuestionObj.Answer);
     if (this.value != currentQuestionObj.Answer) {
       // deduct 11 sec from the time
-      secondsLeft = (secondsLeft - 10);
+      secondsLeft = (secondsLeft - 11);
       timeEl.textContent = secondsLeft + " seconds remaining of quiz.";
-    } else {
+      } else {
       //increase score +1  
       score = (score + 1);
       console.log(score);
     }
     // // increase the index by 1
-    questions[i++];
-    console.log(questions[i++]);
-    //nextQuestion();
+    var nextQuestion = questions[index++];
+    console.log(nextQuestion);
+    currentQuestionObj = nextQuestion;
+    console.log(currentQuestionObj);
+    questionTitle.textContent = currentQuestionObj.Question;
   }
 
   // if there are no more questions in the array end the game else ask the next question
@@ -151,12 +150,12 @@ function quizSequence() {
   //}
   // }
 
-  //In case time runs out before quiz completed
-  if (secondsLeft === 0) {
-    clearInterval(timerInterval);
-    //sendMessage();
-    //return quiz
-  }
+  // //In case time runs out before quiz completed
+  // if (secondsLeft === 0) {
+  //   clearInterval(timerInterval);
+  //   //sendMessage();
+  //   //return quiz
+  // }
 }
 
 // create function that ends the game and stops your timer, hides the wquestion container and displays the game over container
