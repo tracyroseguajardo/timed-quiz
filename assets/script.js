@@ -52,7 +52,7 @@ var questions = [
     Answer: "c",
   },
 ];
-var index = 0;
+var index = 0
 var secondsLeft = 120;
 var score = 0
 
@@ -64,15 +64,17 @@ var timeEl = document.querySelector("#time");
 var gameOverEl = document.getElementById("gameOver");
 var timerInterval;
 //var currentQuestionObj = questions[index];
+//shows nothing in timer until quiz starts
+timeEl.textContent = ""
 
 /* DECLARED FUNCTIONS */
 function start() {
   //immediately shows time remaining upon start with no delay
-  timeEl.textContent = secondsLeft + " seconds remaining of quiz."
+  timeEl.textContent = "Time: " + secondsLeft + " seconds remaining of quiz."
   // when the user clicks start we need to start the timer
   timerInterval = setInterval(function () {
     secondsLeft--;
-    timeEl.textContent = secondsLeft + " seconds remaining of quiz.";
+    timeEl.textContent = "Time: " + secondsLeft + " seconds remaining of quiz.";
     //Stop timer at zero if time runs out before quiz completed
     //It still goes - if question wrong with less than 10 sec remaining but it does stop
     if (secondsLeft <= 0) {
@@ -121,7 +123,7 @@ function quizSequence() {
     if (this.value != currentQuestionObj.Answer) {
       // deduct 11 sec from the time
       secondsLeft = (secondsLeft - 11);
-      timeEl.textContent = secondsLeft + " seconds remaining of quiz.";
+      timeEl.textContent = "Time: " + secondsLeft + " seconds remaining of quiz.";
       index = (index + 1);
     } else {
       //increase score +1  
@@ -130,7 +132,9 @@ function quizSequence() {
       index = (index + 1);
     }
   // if there are no more questions in the array end the game else ask the next question
-  if (index > questions.length) {
+  console.log(index);
+  console.log(questions.length);
+  if (index === questions.length) {
     endGame();
     } else {
     quizEl.textContent = "";
@@ -140,26 +144,36 @@ function quizSequence() {
 }
 
 // create function that ends the game and stops your timer, hides the question container and displays the game over container
-
 function endGame() {
   //if all questions are answered
+  console.log("no more questions");
   //if time runs out
+  clearInterval(timerInterval);
+  timeEl.textContent = ""
+  //hides question container
+  quizEl.setAttribute("class", "hidden");
+  // show the gameOver container
+  gameOverEl.removeAttribute("class");
+  gameOverEl.textContent = "G A M E O V E R"
 
-    //hides question container
-    quizEl.setAttribute("class", "hidden");
-
-    // show the quiz container
-    gameOverEl.removeAttribute("class");
-
-    //create element to show final score
-    var finalScore = document.createElement("h3");
-    finalScore.textContent = "congrats! your final score is:" + score;
-
-    //create box to enter initials
-
-    //create button to submit initials
+  //create element to show final score
+  var finalScore = document.createElement("h3");
+  if (score <= 5) {
+    finalScore.textContent = "better luck next time. your final score is: " + score;
+  } else {
+  finalScore.textContent = "congrats! your final score is: " + score;
   }
 
+  gameOverEl.appendChild(finalScore);
+
+  //create box to enter initials
+  var scoreBoard = document.createElement("input");
+
+
+  //create button to submit initials
+  var submit = document.createElement("input");
+
+  //gameOverEl.appendChild(finalScore, scoreBoard, submit);
 }
 
 /* EVENT LISTENERS */
