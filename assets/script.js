@@ -2,9 +2,9 @@
 // Store Questions as Objects
 var questions = [
   {
-    Question: "A???",
-    choices: ['A', 'b', 'c', 'd', 'f', 'e'],
-    Answer: "c",
+    Question: "Java is the same as JavaScript",
+    choices: ["true", "false"],
+    Answer: "false",
   },
   {
     Question: "B???",
@@ -54,14 +54,15 @@ var questions = [
 ];
 var index = 0;
 var secondsLeft = 120;
+var score = 0
 
 // DOM ELEMENTS
 var startQuiz = document.getElementById("start");
 var startEl = document.getElementById("starter");
 var quizEl = document.getElementById("quiz");
 var timeEl = document.querySelector("#time");
+var gameOverEl = document.getElementById("gameOver");
 var timerInterval;
-var score = 0
 //var currentQuestionObj = questions[index];
 
 /* DECLARED FUNCTIONS */
@@ -72,6 +73,11 @@ function start() {
   timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft + " seconds remaining of quiz.";
+    //Stop timer at zero if time runs out before quiz completed
+    //It still goes - if question wrong with less than 10 sec remaining but it does stop
+    if (secondsLeft <= 0) {
+      clearInterval(timerInterval);
+    }
   }, 1000);
 
   // hide the starter container
@@ -86,7 +92,6 @@ function start() {
 function quizSequence() {
   // get the current question object from the array
   var currentQuestionObj = questions[index];
-
   //Question Title
   //  create elment to display our question title
   var questionTitle = document.createElement("h3");
@@ -107,116 +112,66 @@ function quizSequence() {
     buttonDiv.append(btn);
   }
 
-  // add the elements to quizEl
+  // add Title and Button elements to quizEl
   quizEl.append(questionTitle, buttonDiv);
 
   function checkAnswer() {
     console.log(this.value);
-    //console.log(event.target.value);
-    // check if the answer is wrong
     console.log(currentQuestionObj.Answer);
     if (this.value != currentQuestionObj.Answer) {
       // deduct 11 sec from the time
       secondsLeft = (secondsLeft - 11);
       timeEl.textContent = secondsLeft + " seconds remaining of quiz.";
-      } else {
+      index = (index + 1);
+    } else {
       //increase score +1  
       score = (score + 1);
       console.log(score);
+      index = (index + 1);
     }
-    // // increase the index by 1
-    var nextQuestion = questions[index++];
-    console.log(nextQuestion);
-    currentQuestionObj = nextQuestion;
-    console.log(currentQuestionObj);
-    questionTitle.textContent = currentQuestionObj.Question;
-  }
+    if (index > questions.length) {
+      console.log("RED");
+      endGame();
+    } else {
+      console.log("GREEN");
+      quizEl.textContent = "";
+      //quizEl.removeChild(questionTitle, buttonDiv);
+      quizSequence();
+    }
+  }   
+  // increase the index by 1
 
   // if there are no more questions in the array end the game else ask the next question
-  // for (var i = 0; i < (currentQuestionObj); i++) {
-  //   console.log(currentQuestionObj);
-  //   questionTitle.textContent = currentQuestionObj.Question;
-  // }
-
-
-  // // function nextQuestion() {
-  //   for (var i = 0; i < (currentQuestionObj); i++) {
-  //   console.log(currentQuestionObj);
-  //   questionTitle.textContent = currentQuestionObj.Question;
-  // }
-  //   if (currentQuestionObj.Question[i++]) {
-  //questionTitle.textContent = currentQuestionObj.Question[i++];
-  // console.log(currentQuestionObj.Question[i++])
-  //}
-  // }
-
-  // //In case time runs out before quiz completed
-  // if (secondsLeft === 0) {
-  //   clearInterval(timerInterval);
-  //   //sendMessage();
-  //   //return quiz
-  // }
 }
 
-// create function that ends the game and stops your timer, hides the wquestion container and displays the game over container
+
+
+
+
+// create function that ends the game and stops your timer, hides the question container and displays the game over container
+
+function endGame() {
+  //if all questions are answered
+
+  //if time runs out
+  if (clearInterval) {
+
+    //hides question container
+    quizEl.setAttribute("class", "hidden");
+
+    // show the quiz container
+    gameOverEl.removeAttribute("class");
+
+    //create element to show final score
+    var finalScore = document.createElement("h3");
+    finalScore.textContent = "congrats! your final score is:" + score;
+
+    //create box to enter initials
+
+    //create button to submit initials
+  }
+
+}
 
 /* EVENT LISTENERS */
 startQuiz.addEventListener("click", start);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// TOP: any global variables
-
-// MIDDLE: any functions that are declared
-
-// BOTTOM:  all event listeners
-
-// For Argument to get quiz questions to rotate through
-// alreadyAsked = []
-// //works but repeats questions. I want to cycle through each just once
-// for (var i = 0; i < questions.length; i++) {
-//   var activeQuestion = randomIndex(questions);
-//   console.log(activeQuestion);
-//   alreadyAsked.push(activeQuestion);
-//   console.log(alreadyAsked);
-//   console.log(JSON.stringify(activeQuestion));
-// }
-
-// Randomly pulls a number to act as index call
-// function randomIndex(array) {
-//   return array[Math.floor(Math.random() * array.length)];
-// }
-
-  //In case time runs out before quiz completed
-  // if (secondsLeft === 0) {
-    // clearInterval(timerInterval);
-    // sendMessage();
-    //return quiz
-  // }
-
-    // function sendMessage() {
-  //   timeEl.textContent = "TIME OUT";
-  // }
-
-  // Appends active question to HTML quiz div
-
-    //for loop to pass through all questions
-    // for (var i = 0; i < questions.length; i++){}
