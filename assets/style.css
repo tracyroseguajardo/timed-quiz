@@ -1,3 +1,32 @@
+
+body {
+    background-color: bisque;
+}
+h1 {
+    text-align: center;
+}
 .hidden{
     display: none;
+}
+
+#time {
+    color:darkblue;
+}
+
+/* h3 {
+    text-align: center;
+} */
+
+button {
+    background-color:lightgoldenrodyellow;
+}
+
+#start {
+    background-color:cornflowerblue;
+    border-color:cornflowerblue;
+    font-size: 20px;
+}
+
+p {
+    padding-right: 10%;
 }

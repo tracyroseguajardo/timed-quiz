@@ -3,8 +3,8 @@
 var questions = [
   {
     Question: "Java is the same as JavaScript",
-    choices: ["true", "false"],
-    Answer: "false",
+    choices: ["True", "False"],
+    Answer: "False",
   },
   {
     Question: "What does CSS stand for?",
@@ -70,15 +70,18 @@ timeEl.textContent = ""
 /* DECLARED FUNCTIONS */
 function start() {
   //immediately shows time remaining upon start with no delay
-  timeEl.textContent = "Time: " + secondsLeft + " seconds remaining of quiz."
+  timeEl.textContent = "Time: " + secondsLeft + " seconds remaining of quiz"
   // when the user clicks start we need to start the timer
   timerInterval = setInterval(function () {
     secondsLeft--;
-    timeEl.textContent = "Time: " + secondsLeft + " seconds remaining of quiz.";
+    timeEl.textContent = "Time: " + secondsLeft + " seconds remaining of quiz";
     //Stop timer at zero if time runs out before quiz completed
     //It still goes - if question wrong with less than 10 sec remaining but it does stop
     if (secondsLeft <= 0) {
-      clearInterval(timerInterval);
+      endGame();
+    }
+    if (secondsLeft < 25) {
+      timeEl.setAttribute("style", "color: red");
     }
   }, 1000);
 
@@ -123,7 +126,7 @@ function quizSequence() {
     if (this.value != currentQuestionObj.Answer) {
       // deduct 11 sec from the time
       secondsLeft = (secondsLeft - 11);
-      timeEl.textContent = "Time: " + secondsLeft + " seconds remaining of quiz.";
+      timeEl.textContent = "Time: " + secondsLeft + " seconds remaining of quiz";
       index = (index + 1);
     } else {
       //increase score +1  
@@ -148,8 +151,8 @@ function endGame() {
   //if all questions are answered
   console.log("no more questions");
   //if time runs out
-  clearInterval(timerInterval);
-  timeEl.textContent = ""
+    clearInterval(timerInterval);
+    timeEl.textContent = ""
   //hides question container
   quizEl.setAttribute("class", "hidden");
   // show the gameOver container
