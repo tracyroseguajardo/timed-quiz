@@ -163,6 +163,10 @@ function endGame() {
   }
   gameOverEl.appendChild(finalScore);
 
+  var heading = document.createElement("h4");
+  heading.textContent = "Last Saved Score";
+  gameOverEl.appendChild(heading);
+
   //create box to display high scores
   var scoreBoard = document.createElement("div");
   scoreBoard.setAttribute("class", "box");
@@ -175,48 +179,24 @@ function endGame() {
   form.setAttribute("id", "initials");
   gameOverEl.appendChild(form);
 
-   //BELOW NEEDS WORK!
-
   //create button to submit initials
   var submitButton = document.createElement("input");
   submitButton.setAttribute("type", "submit");
   submitButton.setAttribute("class", "submit");
+  submitButton.setAttribute("style", "background-color:lightgoldenrodyellow");
   gameOverEl.appendChild(submitButton);
 
-  // function displayScore() {
-  //   console.log("YEA");
-  //   localStorage.setItem("initialsSubmit", form);
-  //   scoreBoard.textContent = score + initials;
-  // }
-
-  function showHighScore() {
-    console.log("WORKING!")
+  function showLastScore() {
     var initials = localStorage.getItem("initials");
-    scoreBoard.textContent = initials + score;
+    scoreBoard.textContent = initials + ": " + score;
   }
 
   submitButton.addEventListener("click", function() {
     var initials = document.querySelector("#initials").value;
-    
     localStorage.setItem("initials", initials);
-    showHighScore();
+    showLastScore();
   });
-
-  
-  
-
-
-  //gameOverEl.appendChild(scoreBoard, form, scoreForm);
-
-
-
-  // function displayScore() {
-  //   //scoreBoard.textContent = "message";
-  //   console.log("ENDGAME");
-  // }
-  
 }
 
 /* EVENT LISTENERS */
 startQuiz.addEventListener("click", start);
-//submitButton.addEventListener("click", displayScore);
