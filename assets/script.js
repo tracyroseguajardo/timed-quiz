@@ -1,5 +1,4 @@
 /* GLOBAL VARIABLES */
-// Store Questions as Objects
 var questions = [
   {
     Question: "Java is the same as JavaScript",
@@ -62,8 +61,9 @@ var startEl = document.getElementById("starter");
 var quizEl = document.getElementById("quiz");
 var timeEl = document.querySelector("#time");
 var gameOverEl = document.getElementById("gameOver");
+var submitButton = document.getElementsByClassName("submit");
 var timerInterval;
-//var currentQuestionObj = questions[index];
+
 //shows nothing in timer until quiz starts
 timeEl.textContent = ""
 
@@ -76,7 +76,6 @@ function start() {
     secondsLeft--;
     timeEl.textContent = "Time: " + secondsLeft + " seconds remaining of quiz";
     //Stop timer at zero if time runs out before quiz completed
-    //It still goes - if question wrong with less than 10 sec remaining but it does stop
     if (secondsLeft <= 0) {
       endGame();
     }
@@ -90,7 +89,7 @@ function start() {
   // unhide the quiz container
   quizEl.removeAttribute("class");
 
-  // FUNCTION TO GET QUESTIONS
+  // Function to get questions
   quizSequence();
 }
 
@@ -98,7 +97,7 @@ function quizSequence() {
   // get the current question object from the array
   var currentQuestionObj = questions[index];
   //Question Title
-  //  create elment to display our question title
+  // create elment to display question title
   var questionTitle = document.createElement("h3");
   questionTitle.textContent = currentQuestionObj.Question;
 
@@ -110,7 +109,7 @@ function quizSequence() {
     // create buttons
     var btn = document.createElement("button");
     btn.textContent = currentQuestionObj.choices[i];
-    btn.setAttribute('value', currentQuestionObj.choices[i])
+    btn.setAttribute("value", currentQuestionObj.choices[i])
     btn.onclick = checkAnswer;
 
     // add buttons to container that house buttons
@@ -121,8 +120,8 @@ function quizSequence() {
   quizEl.append(questionTitle, buttonDiv);
 
   function checkAnswer() {
-    console.log(this.value);
-    console.log(currentQuestionObj.Answer);
+    //console.log(this.value);
+    //console.log(currentQuestionObj.Answer);
     if (this.value != currentQuestionObj.Answer) {
       // deduct 11 sec from the time
       secondsLeft = (secondsLeft - 11);
@@ -134,7 +133,7 @@ function quizSequence() {
       //increase index +1
       index = (index + 1);
     }
-  // if there are no more questions in the array end the game else ask the next question
+  // if there are no more questions end the game else ask the next question
   console.log(index);
   console.log(questions.length);
   if (index === questions.length) {
@@ -146,13 +145,9 @@ function quizSequence() {
   }   
 }
 
-// create function that ends the game and stops your timer, hides the question container and displays the game over container
 function endGame() {
-  //if all questions are answered
-  console.log("no more questions");
-  //if time runs out
-    clearInterval(timerInterval);
-    timeEl.textContent = ""
+  clearInterval(timerInterval);
+  timeEl.textContent = ""
   //hides question container
   quizEl.setAttribute("class", "hidden");
   // show the gameOver container
@@ -164,20 +159,56 @@ function endGame() {
   if (score <= 5) {
     finalScore.textContent = "better luck next time. your final score is: " + score;
   } else {
-  finalScore.textContent = "congrats! your final score is: " + score;
+  finalScore.textContent = "not bad! your final score is: " + score;
   }
-
   gameOverEl.appendChild(finalScore);
 
-  //create box to enter initials
-  var scoreBoard = document.createElement("input");
+  //create box to display high scores
+  var initials = localStorage.getItem(initialsSubmit);
+  var scoreBoard = document.createElement("div");
 
+  // Create an <input> element, set its type and name attributes
+  var form = document.createElement("input");
+  form.setAttribute("type", "text");
+  form.setAttribute("placeholder", "your initials");
+  gameOverEl.appendChild(form);
+
+  // var scoreForm = document.createElement("input");
+  // scoreForm.setAttribute("type", "text");
+  // scoreForm.setAttribute("value", score);
+  // // input.type = "readonly"
 
   //create button to submit initials
-  var submit = document.createElement("input");
+  var submitButton = document.createElement("input");
+  submitButton.setAttribute("type", "submit");
+  submitButton.setAttribute("class", "submit");
+  gameOverEl.appendChild(submitButton);
 
-  //gameOverEl.appendChild(finalScore, scoreBoard, submit);
+  // function displayScore() {
+  //   console.log("YEA");
+  //   localStorage.setItem("initialsSubmit", form);
+  //   scoreBoard.textContent = score + initials;
+  // }
+
+  submitButton.addEventListener("click", function() {
+    localStorage.setItem("initialsSubmit", form);
+    localStorage.setItem("initialsSubmit", form);
+    scoreBoard.textContent = score + initials;
+  })
+  
+
+
+  //gameOverEl.appendChild(scoreBoard, form, scoreForm);
+
+
+
+  // function displayScore() {
+  //   //scoreBoard.textContent = "message";
+  //   console.log("ENDGAME");
+  // }
+  
 }
 
 /* EVENT LISTENERS */
 startQuiz.addEventListener("click", start);
+//submitButton.addEventListener("click", displayScore);
