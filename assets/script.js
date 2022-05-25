@@ -164,19 +164,18 @@ function endGame() {
   gameOverEl.appendChild(finalScore);
 
   //create box to display high scores
-  var initials = localStorage.getItem(initialsSubmit);
   var scoreBoard = document.createElement("div");
+  scoreBoard.setAttribute("class", "box");
+  gameOverEl.appendChild(scoreBoard);
 
   // Create an <input> element, set its type and name attributes
   var form = document.createElement("input");
   form.setAttribute("type", "text");
   form.setAttribute("placeholder", "your initials");
+  form.setAttribute("id", "initials");
   gameOverEl.appendChild(form);
 
-  // var scoreForm = document.createElement("input");
-  // scoreForm.setAttribute("type", "text");
-  // scoreForm.setAttribute("value", score);
-  // // input.type = "readonly"
+   //BELOW NEEDS WORK!
 
   //create button to submit initials
   var submitButton = document.createElement("input");
@@ -190,11 +189,20 @@ function endGame() {
   //   scoreBoard.textContent = score + initials;
   // }
 
+  function showHighScore() {
+    console.log("WORKING!")
+    var initials = localStorage.getItem("initials");
+    scoreBoard.textContent = initials + score;
+  }
+
   submitButton.addEventListener("click", function() {
-    localStorage.setItem("initialsSubmit", form);
-    localStorage.setItem("initialsSubmit", form);
-    scoreBoard.textContent = score + initials;
-  })
+    var initials = document.querySelector("#initials").value;
+    
+    localStorage.setItem("initials", initials);
+    showHighScore();
+  });
+
+  
   
 
 

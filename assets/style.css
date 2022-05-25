@@ -38,3 +38,10 @@ button {
 p {
     padding-right: 10%;
 }
+
+.box {
+   border-style: double; 
+   border-color: chartreuse;
+   width: 300px;
+   height: 300px;
+}
