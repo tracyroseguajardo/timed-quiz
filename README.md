@@ -9,3 +9,5 @@ Upon answering each question, the user is automatically presented with another q
 This highly interactive application is housed in a classic and easy to read interface that offers a nod to websites of yore.
 
 Deployed Link: https://tracyroseguajardo.github.io/timed-quiz/
+
+![](./images/screenshot.png)
